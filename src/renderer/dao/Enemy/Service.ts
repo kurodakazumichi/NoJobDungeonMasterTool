@@ -12,20 +12,33 @@ import env from '@/helpers/env';
  *****************************************************************************/
 class EnemyService
 {
-  constructor() {
+  /** コンストラクタ */
+  constructor() 
+  {
     env.setDAO("enemy", this);
   }
 
-  @computed get count() {
+  /** 敵データ数 */
+  @computed get count() 
+  {
     return EnemyRepository.count;
   }
 
-  @action save(enemy:EnemyEntity) {
+  /** データの保存、更新 */
+  @action save(enemy:EnemyEntity) 
+  {
     return EnemyRepository.save(enemy);
   }
 
-  findAll() {
+  /** 全件取得 */
+  findAll() 
+  {
     return EnemyRepository.findAll();
+  }
+
+  /** クエリ検索 */
+  search(query:string) {
+    return EnemyRepository.search(query);
   }
 
 }
