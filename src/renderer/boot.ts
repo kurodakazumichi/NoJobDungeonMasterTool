@@ -30,6 +30,7 @@ const open = async (item:MenuItem, win:BrowserWindow) =>
   // パスを保存
   Env.path = result.filePaths[0];
   win.setTitle(Env.path);
+    EnemyRepository.deserialize(json, EnemyEntity);
 
   Env.unlock();
   win.setEnabled(true);

@@ -12,6 +12,9 @@ export interface IEntity
   id:string;
   setId(id:string):this;
 
+  /** 新規かどうか */
+  isNew:boolean;
+
   /** エンティティのJSONを返す */
   toJSON():any;
 
@@ -24,10 +27,13 @@ export interface IEntity
  *****************************************************************************/
 export default abstract class EntityBase implements IEntity
 {
+  /** コンストラクタ */
   constructor() {
     this._id = "";
   }
 
+  //---------------------------------------------------------------------------
+  // プロパティ
   @observable _id:string;
 
   @computed get id () {
@@ -38,6 +44,11 @@ export default abstract class EntityBase implements IEntity
     this._id = id;
     return this;
   }
+
+  /** 新規フラグ */
+  @computed get isNew() {
+    return this.id === "";
+  }  
 
   /** 派生先で定義 */
   abstract toJSON(): any;

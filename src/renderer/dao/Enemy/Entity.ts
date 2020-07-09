@@ -43,13 +43,9 @@ export default class EnemyEntity extends EntityBase
     return this;
   }
 
-  @computed get isNew() {
-    return this.id === "";
-  }
-
   //---------------------------------------------------------------------------
   // JSON
-    
+
   toJSON() {
     const data = {
       id  : this.id,
