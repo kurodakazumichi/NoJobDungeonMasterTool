@@ -1,0 +1,17 @@
+.a-inputText {
+  font-size: 1em;
+  line-height: 1em;
+
+  &.basic1 {
+    border:0;
+    padding:0.3em;
+    border:solid 1px #ccc;
+    border-radius: 3px;
+    box-shadow: inset 1px 3px 6px -6px rgba(0,0,0,0.5);
+  }
+
+  &.plainText { 
+    border:none;
+  }
+
+}
