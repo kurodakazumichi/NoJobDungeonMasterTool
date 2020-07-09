@@ -24,8 +24,28 @@ class pEnemies extends React.Component<IProps>
 
   render() {
     return (
-      <div className="p-article">
+      <div className="p-enemies">
         <h1>敵一覧</h1>
+
+        <div className="search">
+          <label>検索</label>:<input defaultValue="しょぼん"/>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>名前</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input /></td>
+              <td><input /></td>
+            </tr>
+          </tbody>
+        </table>
+
+
       </div>
     );
   }
