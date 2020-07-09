@@ -1,12 +1,20 @@
+/******************************************************************************
+ * Imports
+ *****************************************************************************/
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+
+import bootstrap from '@/boot';
 
 import Home from '@/pages/Home';
 import Enemies from '@/pages/Enemies/';
 import Enemy from '@/pages/Enemy';
 import '@/assets/css/reset.css';
 
+/******************************************************************************
+ * App
+ *****************************************************************************/
 class App extends React.Component {
   constructor(props:any) {
     super(props);
@@ -26,7 +34,5 @@ class App extends React.Component {
   }
 }
 
-
-
-
+bootstrap();
 ReactDOM.render(<App />, document.getElementById("app"));

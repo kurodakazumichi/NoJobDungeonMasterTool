@@ -14,6 +14,7 @@ class Env
     env.setStore("env", this);
   }
 
+  /** ロック中かどうかのフラグ */
   @observable private _isLock:boolean = false;
 
   @computed get isLock() {
@@ -28,8 +29,24 @@ class Env
     this._isLock = false;
   }
 
+  /** 開発モードかどうか */
   get isDevelopment() {
     return env.isDevelop;
+  }
+
+  /** 現在のパス(ファイル参照先) */
+  private _path:string = "";
+
+  get path() { 
+    return this._path 
+  };
+
+  set path(value:string) {
+     this._path = value;
+  }
+
+  get hasPath() {
+    return this.path !== "";
   }
 
 }
