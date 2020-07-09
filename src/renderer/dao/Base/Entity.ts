@@ -57,7 +57,7 @@ export default abstract class EntityBase<T> implements IEntity<T>
   }
 
   /** リセットする */
-  public reset() {
+  reset() {
     this._id = "";
   }
 

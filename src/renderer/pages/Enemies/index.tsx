@@ -10,11 +10,11 @@ import EnemyEntity from '@/dao/Enemy/Entity';
 
 import * as InputText from '@/components/atoms/Input/Text';
 import * as InputNumb from '@/components/atoms/Input/Number';
+import * as Icon from '@/components/atoms/Icon';
 
 import Store from './store';
 
-import { observable, computed } from 'mobx';
-import * as Icon from '@/components/atoms/Icon';
+import './styles.scss';
 
 /******************************************************************************
  * Interface
@@ -22,57 +22,27 @@ import * as Icon from '@/components/atoms/Icon';
 /** Props */
 export interface IProps {}
 
-class Hoge {
-
-  @observable no:number = 0;
-  @observable name:string = "";
-
-  @observable query:string = "";
-
-  @computed get enemies() {
-    return (this.query === "")
-      ? EnemyService.findAll()
-      : EnemyService.search(this.query);
-  }
-}
-
 /******************************************************************************
  * pEnemiesコンポーネント
  *****************************************************************************/
 @observer
 class pEnemies extends React.Component<IProps>
 {
+  /** ページ専用ストア */
   private store:Store;
 
-  private input = new Hoge();
-  constructor(props:IProps) {
+  constructor(props:IProps) 
+  {
     super(props);
     this.store = new Store();
   }
 
-  onClick() {
-    EnemyService.save(new EnemyEntity().setNo(this.input.no).setName(this.input.name));
-  }
-
-
-  render() {
+  render() 
+  {
     return (
       <div className="p-enemies">
 
         <h1>敵一覧 (全{this.store.count}件)</h1>
-
-        <InputNumb.default
-          value={this.store.newEnemy.no}
-          onChange={ this.store.onChangeNewEnemyNo }
-        />
-        <InputText.default 
-          value={this.store.newEnemy.name}
-          onChange={ this.store.onChangeNewEnemyName }
-        />
-        <Icon.default
-          type={Icon.Type.PlusCircle}
-          onClick={this.store.onClickSaveNewEnemy}
-        />
 
         <div className="search">
           <label>検索</label>:
@@ -81,6 +51,23 @@ class pEnemies extends React.Component<IProps>
             onChange={this.store.onChangeQuery}
           />
         </div>
+
+        <div className="add-form">
+          <InputNumb.default
+            addClass={"no"}
+            value={this.store.newEnemy.no}
+            onChange={ this.store.onChangeNewEnemyNo }
+          />
+          <InputText.default 
+            value={this.store.newEnemy.name}
+            onChange={ this.store.onChangeNewEnemyName }
+          />
+          <Icon.default
+            type={Icon.Type.PlusCircle}
+            onClick={this.store.onClickSaveNewEnemy}
+          />
+        </div>
+
 
         { (0 < this.store.enemies.length) && (
           <table className="enemies-form">
@@ -96,6 +83,7 @@ class pEnemies extends React.Component<IProps>
                   <tr key={e.id}>
                     <td>
                       <InputNumb.default 
+                        addClass={"no"}
                         value={e.no}
                         onChange={(value:number) => {
                           e.setNo(value);
