@@ -2,32 +2,24 @@
  * Imports
  *****************************************************************************/
 import { observable, computed, action } from 'mobx';
+import EntityBase from '@/dao/Base/Entity';
 
 /******************************************************************************
  * Enemy Entity
  *****************************************************************************/
-export default class EnemyEntity
+export default class EnemyEntity extends EntityBase
 {
-  constructor(
-    no:number = 0,
-    name:string = "",
-  ){
-    this._id   = "";
-    this._no   = no;
-    this._name = name;
-  }
-
-  @observable _id:string;
-
-  @computed get id () {
-    return this._id;
-  }
-
-  @action setId(id:string) {
-    this._id = id;
-    return this;
+  /** コンストラクタ */
+  constructor(){
+    super();
+    this._no   = 0;
+    this._name = "";
   }
   
+  //---------------------------------------------------------------------------
+  // プロパティ
+
+  /** No */
   @observable _no:number;
 
   @computed get no() {
@@ -35,10 +27,11 @@ export default class EnemyEntity
   }
 
   @action setNo(no:number) {
-    this._no = no;
+    this._no = parseInt(no.toString());
     return this;
   }
 
+  /** 名称 */
   @observable _name:string;
 
   @computed get name() {
@@ -52,5 +45,25 @@ export default class EnemyEntity
 
   @computed get isNew() {
     return this.id === "";
+  }
+
+  //---------------------------------------------------------------------------
+  // JSON
+    
+  toJSON() {
+    const data = {
+      id  : this.id,
+      no  : this.no,
+      name: this.name,
+    }
+
+    return data;
+  }
+
+  parseJSON(data:any) {
+    this
+      .setId(data.id)
+      .setNo(data.no)
+      .setName(data.name);
   }
 }
