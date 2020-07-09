@@ -11,10 +11,6 @@ let mainWindow
 
 function createMainWindow() {
 
-  const preloadPath = (isDevelopment)
-    ? "../../dist/main/preload.js"
-    : "preload.js";
-
   const window = new BrowserWindow({
     webPreferences: {
       // レンダラープロセスで Node.js 使えないようにする (XSS対策)
@@ -24,9 +20,9 @@ function createMainWindow() {
       // false にしないと、window object を共有できないのでfalse
       contextIsolation: false,
       // preload.jsのpathを指定(絶対パスじゃないと動かなかった)
-      preload: path.resolve(__dirname, preloadPath)
     }
-  })
+  });
+  window.setMenu(null);
 
   if (isDevelopment) {
     window.webContents.openDevTools()
