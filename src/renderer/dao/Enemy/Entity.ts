@@ -7,7 +7,7 @@ import EntityBase from '@/dao/Base/Entity';
 /******************************************************************************
  * Enemy Entity
  *****************************************************************************/
-export default class EnemyEntity extends EntityBase
+export default class EnemyEntity extends EntityBase<EnemyEntity>
 {
   /** コンストラクタ */
   constructor(){
@@ -41,6 +41,22 @@ export default class EnemyEntity extends EntityBase
   @action setName(name:string) {
     this._name = name;
     return this;
+  }
+
+  //---------------------------------------------------------------------------
+  // メソッド
+
+  reset() {
+    super.reset();
+    this._no = 0;
+    this._name = "";
+  }
+
+  public clone() {
+    return new EnemyEntity()
+      .setId(this.id)
+      .setName(this.name)
+      .setNo(this.no);
   }
 
   //---------------------------------------------------------------------------

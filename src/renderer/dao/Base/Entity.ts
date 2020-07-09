@@ -6,7 +6,7 @@ import { observable, computed, action } from 'mobx';
 /******************************************************************************
  * interface
  *****************************************************************************/
-export interface IEntity 
+export interface IEntity<T>
 {
   /** エンティティは必ず一意のIDを１つもつ */
   id:string;
@@ -14,6 +14,12 @@ export interface IEntity
 
   /** 新規かどうか */
   isNew:boolean;
+
+  /** リセット */
+  reset(): void;
+
+  /** 複製を作成する */
+  clone():T;
 
   /** エンティティのJSONを返す */
   toJSON():any;
@@ -25,7 +31,7 @@ export interface IEntity
 /******************************************************************************
  * Enemy Base
  *****************************************************************************/
-export default abstract class EntityBase implements IEntity
+export default abstract class EntityBase<T> implements IEntity<T>
 {
   /** コンストラクタ */
   constructor() {
@@ -48,7 +54,15 @@ export default abstract class EntityBase implements IEntity
   /** 新規フラグ */
   @computed get isNew() {
     return this.id === "";
-  }  
+  }
+
+  /** リセットする */
+  public reset() {
+    this._id = "";
+  }
+
+  /** 複製を作成する */
+  abstract clone():T;
 
   /** 派生先で定義 */
   abstract toJSON(): any;

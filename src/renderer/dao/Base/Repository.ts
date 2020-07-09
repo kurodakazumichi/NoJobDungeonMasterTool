@@ -43,7 +43,7 @@ export interface IRepository<T>
 /******************************************************************************
  * Enemy Repository
  *****************************************************************************/
-export default abstract class RepositoryBase<T extends EntityBase> implements IRepository<T> 
+export default abstract class RepositoryBase<T extends EntityBase<T>> implements IRepository<T> 
 {
   /** コンストラクタ */
   constructor(name:string) {
