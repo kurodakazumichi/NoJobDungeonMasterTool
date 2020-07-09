@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { observable, computed, action  } from 'mobx';
 import { observer } from 'mobx-react';
-import './reset.css';
-import './styles.scss';
+import '@/assets/css/reset.css';
+import '@/assets/scss/styles.scss';
 import window from '@/types/window';
 class Store {
   @observable private _count = 0;
