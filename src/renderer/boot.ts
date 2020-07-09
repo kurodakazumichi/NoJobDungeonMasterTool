@@ -24,6 +24,7 @@ const open = async (item:MenuItem, win:BrowserWindow) =>
   if (result.canceled) {
     Env.unlock();
     win.setEnabled(true);
+    return;
   }
 
   // パスを保存

@@ -46,6 +46,7 @@ class Env
   }
 
   get hasPath() {
+    
     return this.path !== "";
   }
 

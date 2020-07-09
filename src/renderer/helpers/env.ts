@@ -53,7 +53,7 @@ class Env
   }
 
   /**
-   * 開発時のみ、windowオブジェクトにDAOストアをセットする
+   * 開発時のみ、windowオブジェクトにServiceストアをセットする
    */
   setDAO(name:string, store:any) {
     if (!this.isDevelop) return;
