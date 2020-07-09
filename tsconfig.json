@@ -5,7 +5,7 @@
       "noImplicitAny": false,
       "baseUrl": ".",
       "paths": {
-        "@/*": ["src/main/*", "src/renderer/*"],
+        "@/*": ["src/renderer/*"],
         "common/*":["src/common/*"]
       }
   }
