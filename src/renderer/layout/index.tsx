@@ -37,6 +37,7 @@ const Layout = (MainComponent:any) => {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/enemy">敵一覧</Link></li>
+              <li><Link to="/item-categories">アイテムカテゴリ</Link></li>
             </ul>
           </nav>
         </header>

@@ -1,46 +1,21 @@
 /******************************************************************************
  * Imports
  *****************************************************************************/
-import { computed, action } from 'mobx';
-
+import ServiceBase from '@/dao/Base/Service';
+import { IRepository } from '@/dao/base/Repository';
 import ItemCategoryEntity from '@/dao/ItemCategory/Entity';
 import ItemCategoryRepository from '@/dao/ItemCategory/Repository';
-import env from '@/helpers/env';
 
 /******************************************************************************
  * ItemCategory Service
  *****************************************************************************/
-class ItemCategoryService
+class ItemCategoryService extends ServiceBase<ItemCategoryEntity, IRepository<ItemCategoryEntity>>
 {
   /** コンストラクタ */
-  constructor() 
+  constructor(name:string, repo:IRepository<ItemCategoryEntity>) 
   {
-    env.setDAO("itemCategory", this);
+    super(name, repo);
   }
-
-  /** 敵データ数 */
-  @computed get count() 
-  {
-    return ItemCategoryRepository.count;
-  }
-
-  /** データの保存、更新 */
-  @action save(item:ItemCategoryEntity) 
-  {
-    return ItemCategoryRepository.save(item);
-  }
-
-  /** 全件取得 */
-  findAll() 
-  {
-    return ItemCategoryRepository.findAll();
-  }
-
-  /** クエリ検索 */
-  search(query:string) {
-    return ItemCategoryRepository.search(query);
-  }
-
 }
 
-export default new ItemCategoryService();
+export default new ItemCategoryService("itemCategory", ItemCategoryRepository);

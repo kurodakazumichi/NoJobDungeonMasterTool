@@ -1,0 +1,30 @@
+.p-item-categories {
+
+  margin:1em;
+
+  h1 {
+    margin-bottom:1em;
+  }
+
+  .search {
+    margin-bottom:1em;
+  }
+
+  .add-form {
+    margin-bottom:1em;
+
+    .a-icon {
+      margin-left: 1em;
+      color:blue;
+    }
+  }
+
+  table.categories-form {
+    tr {
+      td {
+        vertical-align: middle;
+        padding: 0 0.1em;
+      }
+    }
+  }
+}

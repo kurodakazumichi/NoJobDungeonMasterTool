@@ -10,6 +10,8 @@ import bootstrap from '@/boot';
 import Home from '@/pages/Home';
 import Enemies from '@/pages/Enemies/';
 import Enemy from '@/pages/Enemy';
+import ItemCategories from '@/pages/ItemCategories';
+
 import '@/assets/css/reset.css';
 
 /******************************************************************************
@@ -27,6 +29,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/enemy" component={Enemies} />
             <Route exact path="/enemy/:id" component={Enemy} />
+            <Route exact path="/item-categories" component={ItemCategories} />
           </Switch>
         </Router>
       </div>

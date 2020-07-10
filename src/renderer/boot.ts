@@ -7,11 +7,19 @@ import { remote, MenuItem, BrowserWindow } from 'electron';
 import Env from '@/stores/Env';
 import EnemyRepository from '@/dao/Enemy/Repository';
 import EnemyEntity from './dao/Enemy/Entity';
+import ItemCategoryRepository from '@/dao/ItemCategory/Repository';
+import ItemCategoryEntity from '@/dao/ItemCategory/Entity';
 
 /******************************************************************************
  * アプリケーションメニューの処理
  *****************************************************************************/
 const { Menu, dialog } = remote;
+
+// 設定
+const configs = [
+  { file:"enemy.json"          , repo:EnemyRepository       , entity:EnemyEntity },
+  { file:"item-categories.json", repo:ItemCategoryRepository, entity:ItemCategoryEntity }
+];
 
 /**
  * ディレクトリを選択してデータを読み込む
@@ -42,8 +50,10 @@ const open = async (item:MenuItem, win:BrowserWindow) =>
     win.setTitle(Env.path);
 
     // ファイル読み込み
-    const json = fs.readFileSync(Env.path + "\\enemy.json", 'utf8');
-    EnemyRepository.deserialize(json, EnemyEntity);
+    configs.map((config) => {
+      const json = fs.readFileSync(`${Env.path}\\${config.file}`, 'utf8');
+      config.repo.deserialize(json, config.entity);
+    });
 
   } catch(err) {
     console.log(err);
@@ -69,7 +79,6 @@ const save = async (item:MenuItem, win:BrowserWindow) => {
     {
       const result = await dialog.showOpenDialog({ properties: ['openDirectory']});
       
-
       if (result.canceled) {
         Env.unlock();
         win.setEnabled(true);
@@ -78,7 +87,9 @@ const save = async (item:MenuItem, win:BrowserWindow) => {
       Env.path = result.filePaths[0];
     }
 
-    fs.writeFileSync(Env.path + "\\enemy.json", EnemyRepository.serialize());
+    configs.map((config) => {
+      fs.writeFileSync(`${Env.path}\\${config.file}`, config.repo.serialize());
+    });
 
   } catch(err) {
     console.log(err);

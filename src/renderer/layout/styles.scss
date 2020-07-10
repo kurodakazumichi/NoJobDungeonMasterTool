@@ -8,11 +8,17 @@
     nav {
       ul {
         display: flex;
+        border-bottom:1px solid #000;
 
         li {
-          font-size:11px;
-          padding:3px;
+          font-size:12px;
+          padding:3px 5px;
           color: white;
+          border-right:1px solid #000;
+          
+          &:hover {
+            background-color: red;
+          }
         }
       }
     }

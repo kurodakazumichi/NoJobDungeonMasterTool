@@ -7,7 +7,6 @@ import { observer } from 'mobx-react';
 import Layout from '@/layout';
 
 import * as InputText from '@/components/atoms/Input/Text';
-import * as InputNumb from '@/components/atoms/Input/Number';
 import * as Icon from '@/components/atoms/Icon';
 
 import Store from './store';
@@ -21,10 +20,10 @@ import './styles.scss';
 export interface IProps {}
 
 /******************************************************************************
- * pEnemiesコンポーネント
+ * pItemCategoriesコンポーネント
  *****************************************************************************/
 @observer
-class pEnemies extends React.Component<IProps>
+class pItemCategories extends React.Component<IProps>
 {
   /** ページ専用ストア */
   private store:Store;
@@ -38,9 +37,9 @@ class pEnemies extends React.Component<IProps>
   render() 
   {
     return (
-      <div className="p-enemies">
+      <div className="p-item-categories">
 
-        <h1>敵一覧 (全{this.store.count}件)</h1>
+        <h1>アイテムカテゴリ (全{this.store.count}件)</h1>
 
         <div className="search">
           <label>検索</label>:
@@ -51,43 +50,30 @@ class pEnemies extends React.Component<IProps>
         </div>
 
         <div className="add-form">
-          <InputNumb.default
-            addClass={"no"}
-            value={this.store.newEnemy.no}
-            onChange={ this.store.onChangeNewEnemyNo }
-          />
           <InputText.default 
-            value={this.store.newEnemy.name}
-            onChange={ this.store.onChangeNewEnemyName }
+            value={this.store.newItemCategory.name}
+            onChange={ this.store.onChangeNewName }
           />
           <Icon.default
             type={Icon.Type.PlusCircle}
-            onClick={this.store.onClickSaveNewEnemy}
+            onClick={this.store.onClickSaveNew}
           />
         </div>
 
 
-        { (0 < this.store.enemies.length) && (
-          <table className="enemies-form">
+        { (0 < this.store.categories.length) && (
+          <table className="categories-form">
             <thead>
               <tr>
-                <th>No</th>
+                <th>ID</th>
                 <th>名前</th>
               </tr>
             </thead>
             <tbody>
-              {this.store.enemies.map((e) => {
+              {this.store.categories.map((e) => {
                 return (
                   <tr key={e.id}>
-                    <td>
-                      <InputNumb.default 
-                        addClass={"no"}
-                        value={e.no}
-                        onChange={(value:number) => {
-                          e.setNo(value);
-                        }}
-                      />
-                    </td>
+                    <td>{e.id}</td>
                     <td>
                       <InputText.default 
                         value={e.name}
@@ -108,4 +94,4 @@ class pEnemies extends React.Component<IProps>
 
 }
 
-export default Layout(pEnemies);
+export default Layout(pItemCategories);
