@@ -30,7 +30,7 @@
     "electron-builder": "^22.4.1",
     "electron-webpack": "^2.8.2",
     "electron-webpack-ts": "^4.0.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "sass-loader": "^9.0.2",
     "typescript": "^3.9.6",
     "webpack": "~4.42.1"
